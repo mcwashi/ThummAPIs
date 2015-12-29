@@ -1,6 +1,6 @@
 from sqlalchemy.engine import create_engine
 #engine = create_engine(mysql+mysqldb://<user>:<password>@<host>[:<port>]/<dbname>, echo=True)
-engine = create_engine('mysql://root:surcram#4963@localhost/Thumm')
+engine = create_engine('mysql://username:password@localhost/Thumm')
 
 connection = engine.connect()
 connection.execute(
