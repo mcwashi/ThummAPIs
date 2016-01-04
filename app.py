@@ -2,6 +2,7 @@
 from flask import Flask, jsonify
 
 app = Flask(__name__)
+app.run(host='74.207.235.39')
 
 tasks = [
     {
