@@ -1,6 +1,8 @@
 #!flask/bin/python
 from flask import Flask, jsonify, request
 from flask import abort
+from Thumm import *
+
 
 app = Flask(__name__)
 
@@ -9,8 +11,8 @@ data = [
         'id': 2,
         'name': u'Buy groceries',
         'username': '',
-        'email': 'john@doe.com',
-        'password': 'testpassword',
+        'userEmail': 'john@doe.com',
+        'userPassword': 'testpassword',
         'facebook_id': '',
         'location': 'Los Angelos, United States',
         'image': 'shower_in_thunderstorm_300.jpg',
@@ -28,8 +30,8 @@ data = [
         'id': 4,
         'name': u'Buy groceries',
         'username': '',
-        'email': 'mike@doe.com',
-        'password': 'testpassword',
+        'userEmail': 'mike@doe.com',
+        'userPassword': 'testpassword',
         'facebook_id': '',
         'location': 'Los Angelos, United States',
         'image': 'shower_in_thunderstorm_300.jpg',
@@ -91,9 +93,9 @@ catergories = [
 @app.route('/api/login', methods=['GET'])
 def get_login():
     userEmail = request.args.get('email')
-    userPassword = request.args.get('password')
-    user = [user for user in data if user['email'] == userEmail and user['password'] == userPassword]
-    #user = [user for user in data if user['email'] == userEmail]
+    #userPassword = request.args.get('password')
+    #user = [user for user in data if user['email'] == userEmail and user['password'] == userPassword]
+    user = [user for user in data if user['userEmail'] == userEmail]
     if len(user) == 0:
         abort(404)
     return jsonify({'user': user[0]})
@@ -117,27 +119,6 @@ def get_users():
 def get_catergories():
     return jsonify({'catergories': catergories})
 
-@app.route('/api/register', methods=['POST'])
-if not request.json or not 'title' in request.json:
-    abort(400)
-register = {
-    'id': tasks[-1]['id'] + 1,
-    'email': request.json['email'],
-    'password': request.json['pass'],
-    'name': request.json['name'],
-    'address': request.json.get('address', ""),
-    'day': request.json.get('day',""),
-    'month': request.json.get('month',""),
-    'year': request.json.get('year',""),
-    'time': request.json.get('time',""),
-    'description': request.json.get('description',""),
-    'picture': request.json.get('month',""),
-    #'file' = request.files['file'],
-    'latitude': request.json.get('latitude',""),
-    'longitude': request.json.get('longitude',"")
-}
-registers.append(register)
-return jsonify({'register': register}), 201
 
 
 if __name__ == '__main__':

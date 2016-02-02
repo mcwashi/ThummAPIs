@@ -1,8 +1,8 @@
 #!flask/bin/python
-from flask import Flask, jsonify
+from Thumm import Flask, jsonify
 
 app = Flask(__name__)
-app.run(host='74.207.235.39')
+#app.run(host='74.207.235.39')
 
 tasks = [
     {
@@ -19,7 +19,7 @@ tasks = [
     }
 ]
 
-@app.route('/todo/api/v1.0/tasks', methods=['GET'])
+@app.route('/api/tasks', methods=['GET'])
 def get_tasks():
     return jsonify({'tasks': tasks})
 
